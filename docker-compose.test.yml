@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  sonarqube-2025:
+    image: sonarqube:25.1-community
+    container_name: sq-test-2025
+    ports:
+      - "9100:9000"
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    volumes:
+      - ./plugin-java/target/crypto-rules-java-*.jar:/opt/sonarqube/extensions/plugins/crypto-rules-java.jar
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/api/system/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 20

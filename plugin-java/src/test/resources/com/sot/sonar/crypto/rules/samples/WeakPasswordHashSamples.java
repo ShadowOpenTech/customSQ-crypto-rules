@@ -28,19 +28,19 @@ class WeakPasswordHashSamples {
     // --- Noncompliant: Sub-pattern B — PBKDF2 with low iteration count ---
 
     byte[] deriveKey(char[] password, byte[] salt) throws Exception {
-        PBEKeySpec spec = new PBEKeySpec(password, salt, 10_000, 256); // Noncompliant — < 600,000
+        PBEKeySpec spec = new PBEKeySpec(password, salt, 10_000, 256); // Noncompliant
         return null;
     }
 
     byte[] deriveKeyBorderline(char[] password, byte[] salt) throws Exception {
-        PBEKeySpec spec = new PBEKeySpec(password, salt, 599_999, 256); // Noncompliant — < 600,000
+        PBEKeySpec spec = new PBEKeySpec(password, salt, 599_999, 256); // Noncompliant
         return null;
     }
 
     // --- Noncompliant: Sub-pattern C — unsalted hash on password ---
 
     byte[] unsaltedHash(String password) throws Exception {
-        return MessageDigest.getInstance("SHA-256").digest(password.getBytes()); // Noncompliant — no salt
+        return MessageDigest.getInstance("SHA-256").digest(password.getBytes()); // Noncompliant
     }
 
     // --- Compliant ---

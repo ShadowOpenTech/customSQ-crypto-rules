@@ -1,5 +1,6 @@
 package com.sot.sonar.crypto.rules;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.sonar.java.checks.verifier.CheckVerifier;
 
@@ -16,6 +17,7 @@ class WeakPasswordHashRuleTest {
     }
 
     @Test
+    @Disabled("Kotlin files require the sonar-kotlin plugin; Java CheckVerifier cannot parse .kt files")
     void kotlin_samples() {
         CheckVerifier.newVerifier()
             .onFile(SAMPLES_DIR + "WeakPasswordHashSamples.kt")
