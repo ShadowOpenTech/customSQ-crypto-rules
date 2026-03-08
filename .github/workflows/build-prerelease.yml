@@ -1,0 +1,52 @@
+name: Build & Pre-release
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build plugin JAR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Build plugin
+        run: mvn clean package -pl plugin-java -am -DskipTests
+
+      - name: Delete existing pre-release
+        run: |
+          gh release delete dev-latest --yes 2>/dev/null || true
+          git push origin :refs/tags/dev-latest 2>/dev/null || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create pre-release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: dev-latest
+          name: "Dev build — ${{ github.sha }}"
+          body: |
+            Automated pre-release from commit ${{ github.sha }}
+
+            **Branch:** `${{ github.ref_name }}`
+            **Built:** ${{ github.run_id }}
+
+            Drop the JAR into `$SONARQUBE_HOME/extensions/plugins/` and restart SonarQube.
+          prerelease: true
+          make_latest: false
+          files: plugin-java/target/crypto-rules-java-*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

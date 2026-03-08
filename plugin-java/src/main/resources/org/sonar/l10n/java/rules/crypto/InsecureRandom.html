@@ -1,0 +1,37 @@
+<p>
+  <code>java.util.Random</code> and <code>Math.random()</code> are not cryptographically secure
+  pseudo-random number generators (CSPRNGs). Their output is predictable and must not be used
+  for security-sensitive values such as tokens, session IDs, keys, salts, or nonces.
+</p>
+<p>
+  <code>SecureRandom</code> seeded with a fixed value is also flagged — a fixed seed produces
+  deterministic output, defeating the purpose of secure randomness entirely.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+// Noncompliant — Random used for security token
+String sessionToken = Long.toHexString(new Random().nextLong()); // Noncompliant
+
+// Noncompliant — Math.random() for key material
+byte[] salt = BigInteger.valueOf((long)(Math.random() * Long.MAX_VALUE)) // Noncompliant
+    .toByteArray();
+
+// Noncompliant — fixed seed makes SecureRandom deterministic
+SecureRandom sr = new SecureRandom(new byte[]{1, 2, 3}); // Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+// Use SecureRandom without a fixed seed
+SecureRandom sr = new SecureRandom();
+byte[] token = new byte[32];
+sr.nextBytes(token);
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li>CWE-330: Use of Insufficiently Random Values</li>
+  <li>CWE-336: Same Seed in Pseudo-Random Number Generator</li>
+  <li>OWASP Top 10 2021 A02: Cryptographic Failures</li>
+</ul>

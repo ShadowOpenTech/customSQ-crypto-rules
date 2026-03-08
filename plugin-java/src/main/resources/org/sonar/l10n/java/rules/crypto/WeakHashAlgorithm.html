@@ -1,0 +1,46 @@
+<p>
+  Algorithms such as MD5, SHA-1, MD4, and SHA-0 are cryptographically broken and must not be
+  used in security-sensitive contexts. They are vulnerable to collision and preimage attacks.
+</p>
+
+<p>This rule covers:</p>
+<ul>
+  <li>JDK <code>MessageDigest.getInstance()</code></li>
+  <li>Apache Commons <code>DigestUtils.md5()</code>, <code>DigestUtils.sha1()</code></li>
+  <li>Guava <code>Hashing.md5()</code>, <code>Hashing.sha1()</code>, <code>Hashing.crc32()</code></li>
+  <li>BouncyCastle <code>new MD5Digest()</code>, <code>new SHA1Digest()</code>, <code>new MD4Digest()</code></li>
+</ul>
+
+<p>
+  Severity is adjusted by context: usage near security-related variable or method names
+  (e.g. <code>password</code>, <code>token</code>, <code>auth</code>) raises the issue to CRITICAL.
+  Usage clearly in a non-security context (e.g. <code>cacheKey</code>, <code>etag</code>) is skipped entirely.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+// Noncompliant — MD5 near security context
+MessageDigest md = MessageDigest.getInstance("MD5"); // Noncompliant
+byte[] tokenHash = md.digest(token.getBytes());
+
+// Noncompliant — Apache Commons
+String hash = DigestUtils.md5Hex(password); // Noncompliant
+
+// Noncompliant — BouncyCastle
+MD5Digest digest = new MD5Digest(); // Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+// Use SHA-256 or stronger for general hashing
+MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+// Use a password hashing function for passwords
+// See crypto:WeakPasswordHash for password-specific guidance
+</pre>
+
+<h2>See Also</h2>
+<ul>
+  <li>CWE-327: Use of a Broken or Risky Cryptographic Algorithm</li>
+  <li>OWASP Top 10 2021 A02: Cryptographic Failures</li>
+</ul>

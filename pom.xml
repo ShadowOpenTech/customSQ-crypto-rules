@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sot.sonar.crypto</groupId>
+    <artifactId>customSQ-crypto-rules</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Custom SonarQube Crypto Rules — Parent</name>
+    <description>Monorepo for custom SonarQube cryptographic security rules</description>
+
+    <modules>
+        <module>common</module>
+        <module>plugin-java</module>
+    </modules>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <sonarPluginApi.version>11.1.0.2693</sonarPluginApi.version>
+        <sonarJavaFrontend.version>8.9.0.37768</sonarJavaFrontend.version>
+        <sonarAnalyzerCommons.version>2.18.0.3393</sonarAnalyzerCommons.version>
+
+        <junit.version>5.10.0</junit.version>
+        <assertj.version>3.24.2</assertj.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.sonarsource.api.plugin</groupId>
+                <artifactId>sonar-plugin-api</artifactId>
+                <version>${sonarPluginApi.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.sonarsource.java</groupId>
+                <artifactId>java-frontend</artifactId>
+                <version>${sonarJavaFrontend.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.sonarsource.analyzer-commons</groupId>
+                <artifactId>sonar-analyzer-commons</artifactId>
+                <version>${sonarAnalyzerCommons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.sonarsource.java</groupId>
+                <artifactId>java-checks-testkit</artifactId>
+                <version>${sonarJavaFrontend.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.11.0</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

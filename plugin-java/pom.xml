@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.sot.sonar.crypto</groupId>
+        <artifactId>customSQ-crypto-rules</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>crypto-rules-java</artifactId>
+    <packaging>sonar-plugin</packaging>
+
+    <name>Custom Crypto Rules — Java / Kotlin</name>
+    <description>SonarQube plugin for detecting weak cryptographic practices in Java and Kotlin</description>
+
+    <dependencies>
+        <!-- SonarQube Plugin API (provided by SonarQube at runtime) -->
+        <dependency>
+            <groupId>org.sonarsource.api.plugin</groupId>
+            <artifactId>sonar-plugin-api</artifactId>
+        </dependency>
+
+        <!-- sonar-java AST / check API (provided by the sonar-java plugin at runtime) -->
+        <dependency>
+            <groupId>org.sonarsource.java</groupId>
+            <artifactId>java-frontend</artifactId>
+        </dependency>
+
+        <!-- Rule metadata loader utility -->
+        <dependency>
+            <groupId>org.sonarsource.analyzer-commons</groupId>
+            <artifactId>sonar-analyzer-commons</artifactId>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.sonarsource.java</groupId>
+            <artifactId>java-checks-testkit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+                <artifactId>sonar-packaging-maven-plugin</artifactId>
+                <version>1.23.0.740</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <pluginKey>cryptoRules</pluginKey>
+                    <pluginName>Custom Crypto Rules</pluginName>
+                    <pluginClass>com.sot.sonar.crypto.CryptoRulesPlugin</pluginClass>
+                    <pluginDescription>Detects weak cryptographic practices in Java and Kotlin</pluginDescription>
+                    <sonarQubeMinVersion>9.9</sonarQubeMinVersion>
+                    <requirePlugins>java</requirePlugins>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

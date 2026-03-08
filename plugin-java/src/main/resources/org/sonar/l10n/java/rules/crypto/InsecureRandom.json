@@ -1,0 +1,16 @@
+{
+  "title": "Cryptographically insecure random number generators must not be used in security contexts",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "cwe",
+    "cryptography",
+    "security",
+    "owasp"
+  ],
+  "defaultSeverity": "Critical"
+}
