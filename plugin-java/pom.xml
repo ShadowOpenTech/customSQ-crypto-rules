@@ -62,7 +62,7 @@
                     <pluginName>Custom Crypto Rules</pluginName>
                     <pluginClass>com.sot.sonar.crypto.CryptoRulesPlugin</pluginClass>
                     <pluginDescription>Detects weak cryptographic practices in Java and Kotlin</pluginDescription>
-                    <sonarQubeMinVersion>9.9</sonarQubeMinVersion>
+                    <pluginApiMinVersion>11.1.0.2693</pluginApiMinVersion>
                     <requirePlugins>java</requirePlugins>
                 </configuration>
             </plugin>
