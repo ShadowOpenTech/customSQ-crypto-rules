@@ -29,6 +29,14 @@
             <artifactId>java-frontend</artifactId>
         </dependency>
 
+        <!-- Spring beans (provided by SonarQube scanner engine at runtime) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>6.1.14</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Rule metadata loader utility -->
         <dependency>
             <groupId>org.sonarsource.analyzer-commons</groupId>
