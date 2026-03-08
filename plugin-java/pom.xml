@@ -84,6 +84,7 @@
                     <pluginDescription>Detects weak cryptographic practices in Java and Kotlin</pluginDescription>
                     <pluginApiMinVersion>11.1.0.2693</pluginApiMinVersion>
                     <requirePlugins>java:8.9.0.37768</requirePlugins>
+                    <basePlugin>java</basePlugin>
                 </configuration>
             </plugin>
         </plugins>
