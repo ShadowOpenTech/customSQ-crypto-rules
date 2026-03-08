@@ -8,9 +8,14 @@ public class CryptoRulesPlugin implements Plugin {
     public void define(Context context) {
         context.addExtension(CryptoRulesDefinition.class);
         try {
-            context.addExtension(JavaCheckRegistrar.class);
-        } catch (NoClassDefFoundError ignored) {
-            // sonar-java not loaded in this context; Java checks skipped
+            // Use Class.forName to avoid eager resolution of CheckRegistrar
+            // (sonar-java API) when the java plugin is not loaded in this context.
+            context.addExtension(
+                Class.forName("com.sot.sonar.crypto.JavaCheckRegistrar",
+                    true, getClass().getClassLoader()));
+        } catch (ClassNotFoundException | NoClassDefFoundError ignored) {
+            // sonar-java not available in this context (e.g. scanner-side in SQ 26.x);
+            // JavaCheckRegistrar will be registered when java plugin is present (server-side).
         }
     }
 }
