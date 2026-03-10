@@ -7,8 +7,13 @@ public class CryptoRulesPlugin implements Plugin {
     @Override
     public void define(Context context) {
         context.addExtension(CryptoRulesDefinition.class);
-        // JavaExtensionRegistrar is a BeanDefinitionRegistryPostProcessor that registers
-        // JavaCheckRegistrar after all plugins (including sonar-java) are loaded.
-        context.addExtension(JavaExtensionRegistrar.class);
+        context.addExtension(CryptoSensor.class);
+        try {
+            context.addExtension(
+                Class.forName("com.sot.sonar.crypto.JavaCheckRegistrar",
+                    true, getClass().getClassLoader()));
+        } catch (ClassNotFoundException | NoClassDefFoundError ignored) {
+            // sonar-java not available yet in this loading phase
+        }
     }
 }

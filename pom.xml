@@ -23,8 +23,8 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <sonarPluginApi.version>11.1.0.2693</sonarPluginApi.version>
-        <sonarJavaFrontend.version>8.9.0.37768</sonarJavaFrontend.version>
+        <sonarPluginApi.version>11.0.0.2664</sonarPluginApi.version>
+        <sonarJavaFrontend.version>8.8.0.37665</sonarJavaFrontend.version>
         <sonarAnalyzerCommons.version>2.18.0.3393</sonarAnalyzerCommons.version>
 
         <junit.version>5.10.0</junit.version>
