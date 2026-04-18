@@ -41,7 +41,7 @@ Multiple keywords accumulate as a score — not a single-match binary.
 
 ---
 
-## Rule 4: Insecure Randomness
+## Rule 2: Insecure Randomness
 
 **Rule key:** `crypto:InsecureRandom`
 **Type:** Vulnerability
@@ -74,7 +74,7 @@ Security-context variables: named with `token`, `session`, `key`, `salt`, `nonce
 
 ---
 
-## Rule 6: Password Stored with Weak Hash
+## Rule 3: Password Stored with Weak Hash
 
 **Rule key:** `crypto:WeakPasswordHash`
 **Type:** Vulnerability
